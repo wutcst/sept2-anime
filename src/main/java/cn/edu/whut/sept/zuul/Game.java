@@ -26,30 +26,122 @@ public class Game
 
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+//        Room outside, theater, pub, lab, office;
+
+        Room gate, training, dormitory, lobby, playground, office, classroom, messhall, garden;
+
+        garden = new Room("in the garden",0);
+        classroom = new Room("in the classroom",1);
+        messhall = new Room("in the mess hall",2);
+        office = new Room("in the computing admin office",3);
+        lobby = new Room("in the lobby",4);
+        playground = new Room("on the playground",5);
+        dormitory = new Room("in a dormitory",6);
+        gate = new Room("the main entrance of the university",7);
+        training = new Room("in the training room",8);
+
+        gate.setExit("east",training);
+        gate.setExit("west",dormitory);
+        gate.setExit("north",lobby);
+
+        training.setExit("west",gate);
+        training.setExit("north",playground);
+
+        dormitory.setExit("east",gate);
+        dormitory.setExit("north",office);
+
+        lobby.setExit("east",playground);
+        lobby.setExit("west",office);
+        lobby.setExit("north",classroom);
+        lobby.setExit("south",gate);
+
+        playground.setExit("west",lobby);
+        playground.setExit("north",messhall);
+        playground.setExit("south",training);
+
+        office.setExit("east",lobby);
+        office.setExit("north",garden);
+        office.setExit("south",dormitory);
+
+        classroom.setExit("east",messhall);
+        classroom.setExit("west",garden);
+        classroom.setExit("south",lobby);
+
+        messhall.setExit("west",classroom);
+        messhall.setExit("south",playground);
+
+        garden.setExit("east",classroom);
+        garden.setExit("south",office);
+
+        currentRoom = gate;
+
+        Item lanqiu, zuqiu, longxi, lizi, mofashu, wujinzhiren, mao, gou, yazi, siwangzhizhua,
+                pingguo, jushenzhichui, duolandun, hongshuijing, pobaizhiren, sanxiangzhili;
+        wujinzhiren = new Item("无尽之刃",0,1.35);
+        siwangzhizhua = new Item("死亡之爪",1,1.485);
+        hongshuijing = new Item("红水晶",2,1.6335);
+        sanxiangzhili = new Item("三相之力",3,1.79685);
+        pobaizhiren = new Item("破败之刃",4,1.976535);
+        longxi = new Item("龙息",5,2.174189);
+        duolandun = new Item("多兰盾",6,2.391607);
+        mao = new Item("猫",7,2.630768);
+        gou = new Item("狗",8,2.893845);
+        pingguo = new Item("苹果",9,3.183229);
+        lizi = new Item("梨子",10,3.501552);
+        mofashu = new Item("魔法书",11,3.851708);
+        yazi = new Item("鸭子",12,4.2368878);
+        jushenzhichui = new Item("巨神之锤",13,4.660566);
+        lanqiu = new Item("篮球",14,23.1455);
+        zuqiu = new Item("足球",15,453.4);
+
+        training.addItem(lanqiu);
+        training.addItem(zuqiu);
+
+        dormitory.addItem(longxi);
+        dormitory.addItem(lizi);
+
+        office.addItem(mofashu);
+        office.addItem(wujinzhiren);
+        office.addItem(mao);
+
+        classroom.addItem(jushenzhichui);
+        classroom.addItem(duolandun);
+        classroom.addItem(hongshuijing);
+
+        messhall.addItem(pobaizhiren);
+        messhall.addItem(sanxiangzhili);
+
+        garden.addItem(gou);
+        garden.addItem(pingguo);
+
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+//        outside = new Room("outside the main entrance of the university");
+//        theater = new Room("in a lecture theater");
+//        pub = new Room("in the campus pub");
+//        lab = new Room("in a computing lab");
+//        office = new Room("in the computing admin office");
 
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+//        outside.setExit("east", theater);
+//        outside.setExit("south", lab);
+//        outside.setExit("west", pub);
+//
+//        theater.setExit("west", outside);
+//
+//        pub.setExit("east", outside);
+//
+//        lab.setExit("north", outside);
+//        lab.setExit("east", office);
+//
+//        office.setExit("west", lab);
 
-        theater.setExit("west", outside);
+//        currentRoom = outside;  // start game outside
+    }
 
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+    //向房间中添加物品
+    public void addItemToRoom(Item item, Room room) {
+        room.addItem(item);
     }
 
     public void play()
