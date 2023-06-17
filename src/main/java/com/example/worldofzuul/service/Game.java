@@ -11,18 +11,30 @@
  * @author Michael Kölling and David J. Barnes
  * @version 1.0
  */
-package com.example.worldofzuul.common;
+package com.example.worldofzuul.service;
 
+import com.example.worldofzuul.domain.Room;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Stack;
+
+@Service
 public class Game {
     private Room currentRoom;
+    private Stack<Integer> way;
+
+    @Autowired
+    private RoomService roomService;
 
     public Game() {
         createRooms();
-        printWelcome();
+        way = new Stack<>();
     }
 
     private void createRooms() {
-        Room outside, theater, pub, lab, office;
+        
+/*        Room outside, theater, pub, lab, office;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -32,29 +44,20 @@ public class Game {
         office = new Room("in the computing admin office");
 
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        outside.setExit(Direction.EAST, theater);
+        outside.setExit(Direction.SOUTH, lab);
+        outside.setExit(Direction.WEST, pub);
 
-        theater.setExit("west", outside);
+        theater.setExit(Direction.WEST, outside);
 
-        pub.setExit("east", outside);
+        pub.setExit(Direction.EAST, outside);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        lab.setExit(Direction.NORTH, outside);
+        lab.setExit(Direction.EAST, office);
 
-        office.setExit("west", lab);
+        office.setExit(Direction.WEST, lab);
 
-        currentRoom = outside;  // start game outside
-    }
-
-    private void printWelcome() {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        currentRoom = outside;  // start game outside*/
     }
 
     public Room getCurrentRoom() {

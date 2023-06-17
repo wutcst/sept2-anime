@@ -1,4 +1,4 @@
-package com.example.worldofzuul.domain;
+package com.example.worldofzuul.common;
 
 /**
  * @ClassName Params
