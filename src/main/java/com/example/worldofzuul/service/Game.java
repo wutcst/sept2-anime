@@ -33,7 +33,7 @@ public class Game {
     }
 
     private void createRooms() {
-        
+
 /*        Room outside, theater, pub, lab, office;
 
         // create the rooms
