@@ -3,6 +3,7 @@
 -->
 <script>
 export default {
+  props: ['newPlayer','load','loadMsg'],
   data() {
     return {
       BG:0,
@@ -17,6 +18,15 @@ export default {
       //玩家的[行,列]坐标
       player:[5,5],
     }
+  },
+  watch: {
+    /**
+     * 监听父组件传来的玩家新坐标并应用
+     * @param newPlayer
+     */
+    newPlayer(newPlayer) {
+      this.player = newPlayer;
+    },
   },
   computed: {
     //存储地图的9*9二维数组,0为背景,1为墙壁,2为玩家
@@ -35,17 +45,17 @@ export default {
      */
     getItemType(row,col){
       if(row === this.player[0] && col === this.player[1]){
-        return 2;
+        return this.PLAYER;
       }
       else if(row ===1 ||row === 9||col === 1||col === 9) {
         if (row === 5 || col === 5) {
-          return 0;
+          return this.BG;
         } else {
-          return 1;
+          return this.WALL;
         }
       }
       else{
-        return 0;
+        return this.BG;
       }
     },
     /**
@@ -89,11 +99,9 @@ export default {
 </script>
 
 <template>
-  <div class="map" v-loading="false"
-       element-loading-text="正在切换洞穴"
-       element-loading-background="rgba(122, 122, 122, 0.8)">
-    <div v-for="row in map" class="row">
-      <img v-for="item in row" :src="bg[item]" />
+  <div class="map" v-loading="load" :element-loading-text="loadMsg" element-loading-background="rgba(122, 122, 122, 0.8)">
+    <div v-for="(row, rowIndex) in map" :key="rowIndex" class="row">
+      <img v-for="(item, columnIndex) in row" :key="`${rowIndex}-${columnIndex}`" :src="bg[item]" />
     </div>
   </div>
 </template>

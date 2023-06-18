@@ -1,11 +1,9 @@
 <script>
 export default {
+  props:["name","info","items"],
   data() {
     return {
-      show:true,
-      name:"大厅",
-      info:"这是游戏的大厅",
-      items:["勾八","丘八"]
+      show:true
     }
   }
 }
@@ -32,7 +30,7 @@ export default {
       <el-collapse-transition>
         <div v-show="show">
           <el-descriptions title="物品总览" direction="vertical" :column="3" size="small" border>
-            <div v-for="item in items">
+            <div v-for="item in items" :key="item">
               <el-descriptions-item label="物品名称">{{ item }}</el-descriptions-item>
               <el-descriptions-item label="描述">这是一个{{item}}</el-descriptions-item>
               <el-descriptions-item label="操作" :span="2"><el-button type="primary" size="small">拾取</el-button></el-descriptions-item>

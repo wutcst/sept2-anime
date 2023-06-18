@@ -1,5 +1,6 @@
 <script>
 export default {
+  props:["tracks"],
   data() {
     return {
       tableData:[
@@ -30,7 +31,6 @@ export default {
           op:"随机传送"
         },
       ],
-      tracks:['大厅','教堂'],
       backN:1
     }
   }
@@ -40,7 +40,7 @@ export default {
 <template>
   <div class="panel">
     <el-breadcrumb>
-      <el-breadcrumb-item v-for="(track,index) in tracks">
+      <el-breadcrumb-item v-for="(track,index) in tracks" :key="track">
         <el-text v-if="index === tracks.length - 1" tag="mark">{{ track }}</el-text>
         <el-text v-else>{{ track }}</el-text>
       </el-breadcrumb-item>

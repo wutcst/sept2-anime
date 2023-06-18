@@ -1,7 +1,34 @@
-<script setup>
+<script>
 import GameMap from './components/GameMap.vue'
 import GamePanel from "@/components/GamePanel.vue";
 import HelpPanel from "@/components/HelpPanel.vue";
+export default {
+  components: {
+    GameMap,
+    GamePanel,
+    HelpPanel
+  },
+  data() {
+    return {
+      map:{
+        newPlayer:[5,5],
+        load:false,
+        loadMsg:"正在切换房间"
+      },
+      game:{
+        name:"大厅",
+        info:"这是游戏的大厅",
+        items:["二向箔","碧石"]
+      },
+      help:{
+        tracks:['大厅']
+      }
+    }
+  },
+  methods:{
+  }
+}
+
 </script>
 
 <template>
@@ -16,11 +43,11 @@ import HelpPanel from "@/components/HelpPanel.vue";
       <!-- 定义内容栏 -->
       <el-main>
         <div class="rowa">
-          <game-map></game-map>
-          <game-panel></game-panel>
+          <game-map v-bind="map" />
+          <game-panel v-bind="game" />
         </div>
         <div class="rowb">
-          <help-panel/>
+          <help-panel v-bind="help" />
         </div>
       </el-main>
     </el-container>
