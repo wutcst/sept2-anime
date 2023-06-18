@@ -1,8 +1,14 @@
+<!--
+* @FileDescription: vue帮助面板组件
+-->
 <script>
 export default {
+  //申明需要的数据和可能触发的事件
   props:["tracks"],
+  emits:["go"],
   data() {
     return {
+      //操作的键位帮助
       tableData:[
         {
           key:"UP",
@@ -31,7 +37,27 @@ export default {
           op:"随机传送"
         },
       ],
+      //回退步数,释放事件信息时需要
       backN:1
+    }
+  },
+  //添加监听
+  mounted() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  },
+  methods: {
+    /**
+     * ESC键监听函数,触发回退事件
+     * @param event
+     */
+    handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        // 在这里执行 ESC 键被按下时的操作
+        this.$emit('go','back','1');
+      }
     }
   }
 }
@@ -40,7 +66,7 @@ export default {
 <template>
   <div class="panel">
     <el-breadcrumb>
-      <el-breadcrumb-item v-for="(track,index) in tracks" :key="track">
+      <el-breadcrumb-item v-for="(track,index) in tracks">
         <el-text v-if="index === tracks.length - 1" tag="mark">{{ track }}</el-text>
         <el-text v-else>{{ track }}</el-text>
       </el-breadcrumb-item>
@@ -56,7 +82,7 @@ export default {
       </el-table>
       <div class="group">
         <el-input-number v-model="backN" :min="1" :max="10"/>
-        <el-button type="primary" plain>GoBackN</el-button>
+        <el-button type="primary" plain @click="$emit('go','back',backN)">GoBackN</el-button>
       </div>
     </div>
   </div>

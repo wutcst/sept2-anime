@@ -4,8 +4,10 @@
 <script>
 export default {
   props: ['newPlayer','load','loadMsg'],
+  emits: ['go'],
   data() {
     return {
+      //代表三种地图元素的常量
       BG:0,
       WALL:1,
       PLAYER:2,
@@ -82,6 +84,22 @@ export default {
       //判断是否撞墙
       if(this.getItemType(newPlayer[0],newPlayer[1])==this.WALL){
         return;
+      }
+      else if(newPlayer[0]==0||newPlayer[0]==10||newPlayer[1]==0||newPlayer[1]==10){
+        let direction="";
+        if(newPlayer[0]==0){
+          direction='north'
+        }
+        else if(newPlayer[0]==10){
+          direction='south'
+        }
+        else if(newPlayer[1]==0){
+          direction='west'
+        }
+        else{
+          direction='east'
+        }
+        this.$emit('go',direction)
       }
       else{
         this.player=newPlayer;
