@@ -33,6 +33,9 @@ public class GameController {
     public Result initGame() {
         // 1、从数据库查询房间信息
         List<RoomInfo> roomInfoList = roomInfoService.list();
+        if (roomInfoList == null) {
+            return new Result(false, "房间信息查询失败");
+        }
 
         // 2、构造房间列表
         List<Room> roomList = new ArrayList<>();
