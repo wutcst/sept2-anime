@@ -63,6 +63,25 @@ public class GameTest {
         // 执行 "look" 命令
         Command lookCommand = new LookCommand();
         lookCommand.execute(game);
+    }
+    @Test
+    public void testTeleportRoom() {
+        // 获取传输房间
+        Room trainingRoom = game.getRooms().get(8);
+        Room dormitoryRoom = game.getRooms().get(6);
 
+        assertNotNull(trainingRoom);
+        assertNotNull(dormitoryRoom);
+
+        // 测试进入传输房间后是否会随机传输到其他房间
+        ArrayList<Room> teleportRooms = new ArrayList<>();
+        teleportRooms.add(trainingRoom);
+        teleportRooms.add(dormitoryRoom);
+
+        for (Room room : teleportRooms) {
+            Room nextRoom = game.teleportToRandomRoom(room);
+            assertNotNull(nextRoom);
+            assertFalse(nextRoom.IsTeleportRoom());
+        }
     }
 }
