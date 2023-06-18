@@ -1,9 +1,9 @@
 package com.example.worldofzuul.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.worldofzuul.domain.Room;
-import com.example.worldofzuul.mapper.RoomMapper;
-import com.example.worldofzuul.service.RoomService;
+import com.example.worldofzuul.domain.RoomInfo;
+import com.example.worldofzuul.mapper.RoomInfoMapper;
+import com.example.worldofzuul.service.RoomInfoService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,5 +15,5 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements RoomService {
+public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> implements RoomInfoService {
 }

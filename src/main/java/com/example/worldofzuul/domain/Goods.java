@@ -11,10 +11,24 @@ public class Goods {
     private int id;
     private String name;
     private Integer weight;
+    private Integer roomId;
 
-    public Goods(String name, String description, Integer weight) {
+    public Goods() {
+        
+    }
+
+    public Goods(String name, Integer weight, Integer roomId) {
         this.name = name;
         this.weight = weight;
+        this.roomId = roomId;
+    }
+
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public String getName() {

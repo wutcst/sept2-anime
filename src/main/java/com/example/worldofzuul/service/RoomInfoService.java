@@ -1,7 +1,7 @@
 package com.example.worldofzuul.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.worldofzuul.domain.Room;
+import com.example.worldofzuul.domain.RoomInfo;
 
 /**
  * @ClassName RoomService
@@ -10,5 +10,5 @@ import com.example.worldofzuul.domain.Room;
  * @DATE 2023/6/17 16:58
  * @Version 1.0
  */
-public interface RoomService extends IService<Room> {
+public interface RoomInfoService extends IService<RoomInfo> {
 }

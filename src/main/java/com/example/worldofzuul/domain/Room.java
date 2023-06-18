@@ -18,24 +18,39 @@ import java.util.Set;
  * @DATE 2023/6/15 22:45
  * @Version 1.0
  */
-public class Room {
-    private int id;
-    private String description;
-    private HashMap<Integer, Room> exits;        // stores exits of this room.
+public class Room extends RoomInfo {
+    private HashMap<Integer, Integer> exits;        // stores exits of this room.
     private List<Goods> goodsList;
 
-    public Room(String description) {
-        this.description = description;
+    public Room() {
         exits = new HashMap<>();
         goodsList = new ArrayList<>();
     }
 
-    public void setExit(int direction, Room neighbor) {
-        exits.put(direction, neighbor);
+    public Room(RoomInfo roomInfo) {
+        this.id = roomInfo.id;
+        this.name = roomInfo.name;
+        this.description = roomInfo.description;
+
+        exits = new HashMap<>();
+        goodsList = new ArrayList<>();
     }
 
-    public Room getExit(int direction) {
-        return exits.get(direction);
+    public void setExit(int direction, int neighborRoomId) {
+        exits.put(direction, neighborRoomId);
+    }
+
+    /**
+     * 获取当前房间某方向上的下一个房间id
+     *
+     * @param direction 方位
+     * @return 返回房间id，若无房间则返回-1
+     */
+    public Integer getExit(int direction) {
+        if (exits.containsKey(direction)) {
+            return exits.get(direction);
+        }
+        return -1;
     }
 
     public void addGoods(Goods goods) {
@@ -44,10 +59,6 @@ public class Room {
 
     public List<Goods> getGoodsList() {
         return goodsList;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     private String getExitString() {
