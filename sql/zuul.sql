@@ -11,7 +11,7 @@
  Target Server Version : 50737
  File Encoding         : 65001
 
- Date: 17/06/2023 22:41:19
+ Date: 18/06/2023 17:30:00
 */
 
 SET NAMES utf8mb4;
@@ -25,10 +25,10 @@ CREATE TABLE `goods`  (
   `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `weight` int(11) NULL DEFAULT NULL,
-  `roomId` int(11) NULL DEFAULT NULL,
+  `room_Id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `foreign_key_1`(`roomId`) USING BTREE,
-  CONSTRAINT `foreign_key_1` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`) ON DELETE NO ACTION ON UPDATE SET NULL
+  INDEX `foreign_key_1`(`room_Id`) USING BTREE,
+  CONSTRAINT `foreign_key_1` FOREIGN KEY (`room_Id`) REFERENCES `room_info` (`id`) ON DELETE NO ACTION ON UPDATE SET NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -52,10 +52,10 @@ INSERT INTO `goods` VALUES (14, '篮球', 13, 8);
 INSERT INTO `goods` VALUES (15, '足球', 99, 8);
 
 -- ----------------------------
--- Table structure for room
+-- Table structure for room_info
 -- ----------------------------
-DROP TABLE IF EXISTS `room`;
-CREATE TABLE `room`  (
+DROP TABLE IF EXISTS `room_info`;
+CREATE TABLE `room_info`  (
   `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -63,16 +63,16 @@ CREATE TABLE `room`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of room
+-- Records of room_info
 -- ----------------------------
-INSERT INTO `room` VALUES (0, 'garden', '花园');
-INSERT INTO `room` VALUES (1, 'classroom', '教室');
-INSERT INTO `room` VALUES (2, 'canteem', '食堂');
-INSERT INTO `room` VALUES (3, 'office', '办公室');
-INSERT INTO `room` VALUES (4, 'lobby', '大堂');
-INSERT INTO `room` VALUES (5, 'playground', '操场');
-INSERT INTO `room` VALUES (6, 'dorm', '宿舍');
-INSERT INTO `room` VALUES (7, 'gate', '校门');
-INSERT INTO `room` VALUES (8, 'trainingroom', '训练室');
+INSERT INTO `room_info` VALUES (0, 'garden', '花园');
+INSERT INTO `room_info` VALUES (1, 'classroom', '教室');
+INSERT INTO `room_info` VALUES (2, 'canteem', '食堂');
+INSERT INTO `room_info` VALUES (3, 'office', '办公室');
+INSERT INTO `room_info` VALUES (4, 'lobby', '大堂');
+INSERT INTO `room_info` VALUES (5, 'playground', '操场');
+INSERT INTO `room_info` VALUES (6, 'dorm', '宿舍');
+INSERT INTO `room_info` VALUES (7, 'gate', '校门');
+INSERT INTO `room_info` VALUES (8, 'trainingroom', '训练室');
 
 SET FOREIGN_KEY_CHECKS = 1;
