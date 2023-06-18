@@ -8,6 +8,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private boolean isTeleportRoom;
 
     private int num;
     private ArrayList<Item> items; // 添加物品列表
@@ -16,6 +17,7 @@ public class Room
     {
         this.description = description;
         this.num = num;
+        this.isTeleportRoom = false;
         exits = new HashMap<>();
         items = new ArrayList<>(); // 初始化物品列表
     }
@@ -57,6 +59,13 @@ public class Room
     //移除房间内的物品
     public void removeItem(Item item) {
         items.remove(item);
+    }
+
+    public  void setisTeleportRoom(boolean is){
+        this.isTeleportRoom = is;
+    }
+    public boolean IsTeleportRoom(){
+        return this.isTeleportRoom;
     }
 
     public ArrayList<Item> getItems() {

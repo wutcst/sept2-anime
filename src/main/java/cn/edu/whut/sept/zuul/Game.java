@@ -13,10 +13,14 @@
  */
 package cn.edu.whut.sept.zuul;
 
+import java.util.ArrayList;
+
 public class Game
 {
     private Parser parser;
     private Room currentRoom;
+
+    private ArrayList<Room> rooms = new ArrayList<>();
 
     public Game()
     {
@@ -74,6 +78,12 @@ public class Game
         garden.setExit("south",office);
 
         currentRoom = gate;
+
+        training.setisTeleportRoom(true);
+        dormitory.setisTeleportRoom(true);
+
+        rooms.add(garden);rooms.add(classroom);rooms.add(messhall);rooms.add(office);rooms.add(lobby);
+        rooms.add(playground);rooms.add(dormitory);rooms.add(gate);rooms.add(training);
 
         Item lanqiu, zuqiu, longxi, lizi, mofashu, wujinzhiren, mao, gou, yazi, siwangzhizhua,
                 pingguo, jushenzhichui, duolandun, hongshuijing, pobaizhiren, sanxiangzhili;
@@ -181,4 +191,27 @@ public class Game
     public void setCurrentRoom(Room room){
         this.currentRoom = room;
     }
+
+    public ArrayList<Room> getRooms(){
+        return this.rooms;
+    }
+
+    public Room teleportToRandomRoom(Room currentRoom) {
+        // 当前房间是传输房间，随机传输到另一个房间
+        ArrayList<Room> availableRooms = new ArrayList<>();
+        for(Room room:rooms){
+            if(!room.IsTeleportRoom())
+                availableRooms.add(room);
+        }
+        int randomIndex = (int) (Math.random() * availableRooms.size());
+        Room nextRoom = availableRooms.get(randomIndex);
+
+        // 如果下一个房间是传输房间，则递归调用传输方法
+        if (nextRoom.IsTeleportRoom()) {
+            nextRoom = teleportToRandomRoom(nextRoom);
+        }
+
+        return nextRoom;
+    }
+
 }
