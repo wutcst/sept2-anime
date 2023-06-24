@@ -230,10 +230,23 @@ INSERT INTO `room_info` VALUES (8, 'trainingroom', '训练室');
 
 SET FOREIGN_KEY_CHECKS = 1;
 ```
+![cache](image/11.png)
 4. 新增图形化设计界面
 
-5. 分支模型与代码审查
-![branchs](image/2.png) ![maven](image/3.png)
+5. 代码与版本优化
+* 旧版本类图
+![oldversion](image/12.png)
+* 新版本采用数据包对类之间进行新封装
+![new](image/13.png)
+6. 分支模型与代码审查
+![branchs](image/2.png)
+* 审查通过并合并
+![审查](image/9.png) 
+* 审查不通过
+![审查](image/10.png)
+* actions审查与自动集成过程
+![maven](image/3.png)
+7. 版本集成与更替
 
 
 
