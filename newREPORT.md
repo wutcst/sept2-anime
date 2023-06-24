@@ -270,13 +270,39 @@ SET FOREIGN_KEY_CHECKS = 1;
    * RoomInfoServiceImpl类：这是RoomInfoService接口的实现类，实现了对房间信息进行操作的方法。
 7. 单元测试模块
    * 旧版本测试    
-   
-   ![oldtest](image/14.png)
+   ```
+   @Test
+    public void testTeleportRoom() {
+        // 获取传输房间
+        Room trainingRoom = game.getRooms().get(8);
+        Room dormitoryRoom = game.getRooms().get(6);
+
+        assertNotNull(trainingRoom);
+        assertNotNull(dormitoryRoom);
+
+        // 测试进入传输房间后是否会随机传输到其他房间
+        ArrayList<Room> teleportRooms = new ArrayList<>();
+        teleportRooms.add(trainingRoom);
+        teleportRooms.add(dormitoryRoom);
+
+        for (Room room : teleportRooms) {
+            Room nextRoom = game.teleportToRandomRoom(room);
+            assertNotNull(nextRoom);
+            assertFalse(nextRoom.IsTeleportRoom());
+        }
+    }
+   ```
    * 新版本采用SpringbootTest测试工具，对全局命令接口进行测试
-   
-   ![newtest](image/15.png)
+   ```
+   @SpringBootTest
+   class WorldofzuulApplicationTests {
+    @Test
+    void contextLoads() {
+    }
+   }
+   ```
    * SpringbootTest测试结果
-   ![testoutcome](image/16.png)
+   ![testoutcome](image/11.png)
 
 ## 四、实践结果记录
 
