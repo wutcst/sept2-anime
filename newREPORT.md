@@ -234,7 +234,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 4. 新增图形化设计界面
 
 5. 代码与版本优化
-* 旧版本类图
+* 旧版本只实现了基础的后端开发版本，其类图
 ![oldversion](image/12.png)
 * 新版本采用数据包对类之间进行新封装
 ![new](image/13.png)
@@ -246,7 +246,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 ![审查](image/10.png)
 * actions审查与自动集成过程
 ![maven](image/3.png)
-7. 版本集成与更替
+
+## 四、实践结果记录
 
 
 
