@@ -72,17 +72,5 @@ public class MoveController {
         return new Result(true, "成功", preRoomId);
 
     }
-    @GetMapping
-    public Result look(){
-        // 判断游戏是否初始化
-        if (!game.checkIsInit()) {
-            return new Result(false, "游戏未初始化");
-        }
-        Room currentroom = game.getCurrentRoom();
-        List<Goods> goods = currentroom.getGoodsList();
-        if(goods==null)
-            return new Result(true,"该房间没有物品");
-        else
-            return new Result(true,"成功",goods);
-    }
+
 }
