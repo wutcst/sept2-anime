@@ -33,7 +33,6 @@ public class BagController {
         if (!game.checkIsInit()) {
             return new Result(false, "游戏未初始化");
         }
-
         // 1、获取当前房间的id
         Integer currentRoomId = game.getCurrentRoomId();
 
