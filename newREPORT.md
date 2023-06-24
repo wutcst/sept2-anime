@@ -237,7 +237,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 * 旧版本只实现了基础的后端开发版本，其类图
 ![oldversion](image/12.png)
 * 新版本采用数据包对类之间进行新封装
-![new](image/13.png)
+![new](image/class.png)
 6. 分支模型与代码审查
 ![branchs](image/2.png)
 * 审查通过并合并
