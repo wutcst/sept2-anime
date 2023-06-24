@@ -148,7 +148,6 @@ public class Game {
         }
         return null;
     }
-
     public Integer getCurrentRoomId() {
         return currentRoomId;
     }
