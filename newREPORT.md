@@ -48,8 +48,8 @@
 #### 代码审查
 ![审查](image/8.png)
 ### 开发流程
-1. 分配任务并创建开发分支及特性分支，编写maven脚本代码审查工具并应用
-![issue](image/1.png) ![branchs](image/2.png) ![maven](image/3.png)
+1. 分配issue任务
+![issue](image/1.png) 
 2. 新增look功能，新增物品goods类，增加传送房间功能
 * 新增goods类
 ```java
@@ -232,6 +232,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 ```
 4. 新增图形化设计界面
 
-5. 分支模型与代码合并
+5. 分支模型与代码审查
+![branchs](image/2.png) ![maven](image/3.png)
+
 
 
