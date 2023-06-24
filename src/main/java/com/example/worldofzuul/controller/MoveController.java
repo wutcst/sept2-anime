@@ -3,10 +3,13 @@ package com.example.worldofzuul.controller;
 import com.example.worldofzuul.common.Game;
 import com.example.worldofzuul.common.Params;
 import com.example.worldofzuul.common.Result;
+import com.example.worldofzuul.domain.Goods;
 import com.example.worldofzuul.domain.Room;
 import com.example.worldofzuul.service.MoveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @ClassName CommandConreoller
@@ -46,6 +49,10 @@ public class MoveController {
             return new Result(false, "移动失败");
         }
         game.setCurrentRoomId(nextRoomId);
+        if(game.getCurrentRoom().getIstransport())
+        {
+            nextRoomId = game.TransportTorandom(game.getCurrentRoom()).getId();
+        }
         return new Result(true, "移动成功", nextRoomId);
     }
 
@@ -64,5 +71,18 @@ public class MoveController {
         game.setCurrentRoomId(preRoomId);
         return new Result(true, "成功", preRoomId);
 
+    }
+    @GetMapping
+    public Result look(){
+        // 判断游戏是否初始化
+        if (!game.checkIsInit()) {
+            return new Result(false, "游戏未初始化");
+        }
+        Room currentroom = game.getCurrentRoom();
+        List<Goods> goods = currentroom.getGoodsList();
+        if(goods==null)
+            return new Result(true,"该房间没有物品");
+        else
+            return new Result(true,"成功",goods);
     }
 }

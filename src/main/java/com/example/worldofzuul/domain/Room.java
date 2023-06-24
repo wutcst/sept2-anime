@@ -21,10 +21,12 @@ import java.util.Set;
 public class Room extends RoomInfo {
     private HashMap<Integer, Integer> exits;        // stores exits of this room.
     private List<Goods> goodsList;
+    private boolean istransport;
 
     public Room() {
         exits = new HashMap<>();
         goodsList = new ArrayList<>();
+        istransport = false;
     }
 
     public Room(RoomInfo roomInfo) {
@@ -73,6 +75,12 @@ public class Room extends RoomInfo {
             }
         }
         return returnString.toString();
+    }
+    public void setIstransport(){
+        istransport = true;
+    }
+    public boolean getIstransport(){
+        return istransport;
     }
 
 }

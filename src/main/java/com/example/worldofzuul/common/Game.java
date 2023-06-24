@@ -13,6 +13,7 @@
  */
 package com.example.worldofzuul.common;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.example.worldofzuul.domain.Room;
 import org.springframework.stereotype.Component;
 
@@ -80,10 +81,12 @@ public class Game {
                     room.setExit(Direction.WEST, 4);
                     room.setExit(Direction.SOUTH, 8);
                     room.setExit(Direction.NORTH, 2);
+                    room.setIstransport();
                 }
                 case 6 -> {
                     room.setExit(Direction.EAST, 7);
                     room.setExit(Direction.NORTH, 3);
+                    room.setIstransport();
                 }
                 case 7 -> {
                     room.setExit(Direction.EAST, 8);
@@ -159,5 +162,22 @@ public class Game {
 
     public boolean checkIsInit() {
         return this.roomList != null && !this.roomList.isEmpty() && this.currentRoomId != null;
+    }
+
+    public Room TransportTorandom(Room currentroom){
+        List<Room> aviliablerooms  = roomList;
+        for(Room room:roomList){
+            if(!room.getIstransport())
+                aviliablerooms.add(room);
+        }
+        int randomIndex = (int) (Math.random() * aviliablerooms.size());
+        Room nextRoom = aviliablerooms.get(randomIndex);
+
+        // 如果下一个房间是传输房间，则递归调用传输方法
+        if (nextRoom.getIstransport()) {
+            nextRoom = TransportTorandom(nextRoom);
+        }
+
+        return nextRoom;
     }
 }
