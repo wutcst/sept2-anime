@@ -37,20 +37,26 @@
 
 ## 三、开发实现
 ### 开发计划
-#### 系统架构
+#### 1.系统设计
+* 基于此我们设计出了后端由Java Springboot提供网络服务，继承了网络API和随机传送、房间回退等业务逻辑，前端由服务器桥接层使用Node JS和Vue架构来对页面进行管理和布局；浏览器端负责对HTML文件进行渲染和Ajax数据加载的系统框架。
 ![系统架构](image/4.png)
-#### 接口说明
+#### 2.接口设计
+* 通过将后端命令功能API接口化，使前端页面能够通过访问接口的方式触发命令。网页端通过提出get/post请求向服务器端提出访问，服务器端则通过接口返回相应的信息，从而实现后端功能的可视化。
 ![接口说明](image/5.png)
-#### 项目管理
+#### 3.项目管理设计
+* 在项目的生命周期管理，代码的编译、测试等方面通过引入maven对整个项目进行管理，同时对提交的代码进行测试，实现自动化布局。在版本管理上采用git命令灵活地控制版本，以便对项目进行更强地迭代开发。同时在gihub为我们提供了良好的项目管理工作，通过actions创建自动化工作流使我们能够托管代码。
 ![项目管理](image/6.png)
-#### 分支管理
+#### 4.分工化设计
+* 项目工作量不低，在仓库里创建多个特性分支利于我们良好地通过不断地更新迭代，有条不紊地进行着各自任务，而不至于在一个分支上同时工作造成的系统紊乱等问题。master作为我们的主分支以及发布分支，在开发过程中每个开发分支集中到dev分支上，最后由dev分支集成到master分支进行发布。
 ![分支](image/7.png)
-#### 代码审查
+#### 5.审查与测试
+* 作为一个项目而言，小组中的提交次数绝不会低，为避免提交的代码不具有很好的执行力和规范性，一个良好的自动化审查与测试工具必不可少，通过编写maven脚本再结合actions自动化，可以在代码提交至远程仓库时及时对代码审查与测试，通过测试的分支代码才能够合并至目标分支，实现开发功能。
 ![审查](image/8.png)
 ### 开发流程
-1. 分配issue任务
+#### 1.分配任务
+* 创建issue房间
 ![issue](image/1.png) 
-2. 新增look功能，新增物品goods类，增加传送房间功能
+####  2.新增look功能，新增物品goods类，增加传送房间功能
 * 新增goods类
 ```java
 public class Goods {
@@ -137,8 +143,8 @@ public Room TransportTorandom(Room currentroom){
         return nextRoom;
     }
 ```
-3. 新增back回退功能，增加数据库
-* 高级back功能
+#### 3.新增back回退功能，增加数据库
+* 高级back功能 
 ```java
 @RestController
 @RequestMapping("/move")
@@ -230,22 +236,47 @@ INSERT INTO `room_info` VALUES (8, 'trainingroom', '训练室');
 
 SET FOREIGN_KEY_CHECKS = 1;
 ```
-![cache](image/11.png)
-4. 新增图形化设计界面
-
-5. 代码与版本优化
-* 旧版本只实现了基础的后端开发版本，其类图
-![oldversion](image/12.png)
-* 新版本采用数据包对类之间进行新封装
-![new](image/class.png)
-6. 分支模型与代码审查
-![branchs](image/2.png)
-* 审查通过并合并
-![审查](image/9.png) 
-* 审查不通过
-![审查](image/10.png)
-* actions审查与自动集成过程
-![maven](image/3.png)
+4. 代码与版本优化
+   * 旧版本只实现了基础的后端开发版本，其类图
+   ![oldversion](image/12.png)
+   * 新版本采用数据包对类之间进行新封装
+   ![new](image/class.png)
+5. 分支模型与代码审查
+   * 分支模型
+   ![branchs](image/2.png)
+   * 审查通过并合并
+   ![审查](image/9.png) 
+   * 审查不通过
+   ![审查](image/10.png)
+   * actions审查与自动集成过程
+   ![maven](image/3.png)
+6. 项目发布类间关系分析
+   * Game类：这是游戏的主类，负责创建和初始化游戏的各个组件，包括房间、解析器等。它还包含了一些方法，如初始化当前房间ID、创建房间、进入下一个房间等。
+   * Direction类：这是一个辅助类，定义了四个方向常量：东、西、南、北，分别用整数表示。
+   * Params类：这是一个参数类，用于存储房间和类型信息。
+   * Result类：这是一个结果类，用于封装操作的结果，包括操作是否成功、提示消息和返回的数据。
+   * Goods类：这是一个物品类，表示游戏中的物品，包括物品的名称、重量和所在的房间ID等属性。
+   * Room类：这是房间类，用于表示游戏中的房间。每个房间有一个唯一的ID、名称、描述以及与其他房间的连接关系（出口）。房间还可以包含一些物品。
+   * RoomInfo类：这是房间信息类，是Room类的父类，包含房间的基本信息，如ID、名称和描述。
+   * GoodsMapper接口：这是一个数据访问层接口，用于操作Goods对象的持久化操作。
+   * RoomInfoMapper接口：这是另一个数据访问层接口，用于操作RoomInfo对象的持久化操作。
+   * GameService接口：这是游戏服务接口，定义了初始化游戏的方法。
+   * GoodsService接口：这是物品服务接口，用于对物品进行操作。
+   * MoveService接口：这是移动服务接口，定义了游戏中的移动方法，如向东、向南、向西、向北移动以及返回上一个房间。
+   * RoomInfoService接口：这是一个房间信息服务接口，定义了对房间信息进行操作的方法，如获取房间信息、更新房间信息等。
+   * GameServiceImpl类：这是GameService接口的实现类，实现了游戏的初始化方法。
+   * GoodsServiceImpl类：这是GoodsService接口的实现类，实现了对物品进行操作的方法。
+   * MoveServiceImpl类：这是MoveService接口的实现类，实现了游戏中的移动方法。
+   * RoomInfoServiceImpl类：这是RoomInfoService接口的实现类，实现了对房间信息进行操作的方法。
+7. 单元测试模块
+   * 旧版本测试    
+   
+   ![oldtest](image/14.png)
+   * 新版本采用SpringbootTest测试工具，对全局命令接口进行测试
+   
+   ![newtest](image/15.png)
+   * SpringbootTest测试结果
+   ![testoutcome](image/16.png)
 
 ## 四、实践结果记录
 
