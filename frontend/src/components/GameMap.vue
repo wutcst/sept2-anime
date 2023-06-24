@@ -2,6 +2,7 @@
 * @FileDescription: vue地图组件
 -->
 <script>
+import ElementPlus from 'element-plus'
 export default {
   props: ['newPlayer','load','loadMsg'],
   emits: ['go'],
